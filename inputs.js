@@ -1,4 +1,4 @@
-const parseJSON = (getInput, property) => {
+function parseJSON(getInput, property) {
   const value = getInput(property);
   if (!value) {
     return;
@@ -11,7 +11,7 @@ const parseJSON = (getInput, property) => {
   }
 };
 
-const parseInputs = (getInput) => {
+function parseInputs(getInput) {
   const repo = getInput('repo');
   const sha = getInput('sha');
   const token = getInput('token', {required: true});
