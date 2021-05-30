@@ -45,7 +45,7 @@ async function run() {
         repo: ownership.repo,
         ref: sha
     })
-    console.log(response);
+    console.log(response.data.check_runs[0]);
 
     } catch (error) {
     core.setFailed(error.message);
