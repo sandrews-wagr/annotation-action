@@ -29,7 +29,6 @@ const parseInputs = (getInput) => {
     const name = getInput('name');
     const checkIDStr = getInput('check_id');
   
-    const status = getInput('status', {required: true});
     let conclusion = getInput('conclusion');
   
     const actionURL = getInput('action_url');
