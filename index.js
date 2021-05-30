@@ -12,8 +12,8 @@ const getSHA = (inputSHA) => {
     let sha = github.context.sha;
     if (prEvents.includes(github.context.eventName)) {
         const pull = github.context.payload.pull_request;
-        if (pull?.head.sha) {
-          sha = pull?.head.sha;
+        if (pull && pull.head.sha) {
+          sha = pull.head.sha;
         }
     }
     if (inputSHA) {
