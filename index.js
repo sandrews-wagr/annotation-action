@@ -21,38 +21,41 @@ const getSHA = (inputSHA) => {
     }
     return sha;
 };
+async function run() {
+    try {
+    const annotationsPath = core.getInput('annotations');
+    const data = fs.readFileSync(annotationsPath, 'utf8')
+    console.log(data)
 
-try {
-  const annotationsPath = core.getInput('annotations');
-  const data = fs.readFileSync(annotationsPath, 'utf8')
-  console.log(data)
+    core.debug('Getting inputs');
+    const inputs = parseInputs(core.getInput);
 
-  core.debug('Getting inputs');
-  const inputs = parseInputs(core.getInput);
+    core.debug('Setting up octokit');
+    const octokit = github.getOctokit(inputs.token);
 
-  core.debug('Setting up octokit');
-  const octokit = github.getOctokit(inputs.token);
+    const ownership = {
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+    };
 
-  const ownership = {
-    owner: github.context.repo.owner,
-    repo: github.context.repo.repo,
-  };
+    const sha = getSHA(inputs.sha);
 
-  const sha = getSHA(inputs.sha);
+    if (inputs.repo) {
+        const repo = inputs.repo.split('/');
+        ownership.owner = repo[0];
+        ownership.repo = repo[1];
+    }
 
-  if (inputs.repo) {
-    const repo = inputs.repo.split('/');
-    ownership.owner = repo[0];
-    ownership.repo = repo[1];
-  }
+    const response = await octokit.request(`GET /repos/${ownership.owner}/${ownership.repo}/commits/${sha}/check-runs`, {
+        owner: 'octocat',
+        repo: 'hello-world',
+        ref: 'ref'
+    })
+    console.log(response);
 
-  const response = await octokit.request(`GET /repos/${ownership.owner}/${ownership.repo}/commits/${sha}/check-runs`, {
-    owner: 'octocat',
-    repo: 'hello-world',
-    ref: 'ref'
-  })
-  console.log(response);
-
-} catch (error) {
-  core.setFailed(error.message);
+    } catch (error) {
+    core.setFailed(error.message);
+    }
 }
+
+run();
