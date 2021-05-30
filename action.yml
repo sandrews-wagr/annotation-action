@@ -4,6 +4,9 @@ inputs:
   annotations:  # path to json file with annotations
     description: 'Path to annotations JSON file'
     required: true
+  token:
+    description: 'your GITHUB_TOKEN'
+    required: true
 runs:
   using: 'node12'
   main: 'index.js'
