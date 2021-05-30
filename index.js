@@ -39,12 +39,6 @@ async function run() {
     console.log('Getting SHA')
     const sha = getSHA();
 
-    if (inputs.repo) {
-        const repo = inputs.repo.split('/');
-        ownership.owner = repo[0];
-        ownership.repo = repo[1];
-    }
-
     console.log('Making Request...')
     const response = await octokit.request(`GET /repos/${ownership.owner}/${ownership.repo}/commits/${sha}/check-runs`, {
         owner: 'octocat',
