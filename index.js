@@ -8,16 +8,13 @@ const prEvents = [
   'pull_request_review_comment',
 ];
 
-const getSHA = (inputSHA) => {
+const getSHA = () => {
     let sha = github.context.sha;
     if (prEvents.includes(github.context.eventName)) {
         const pull = github.context.payload.pull_request;
         if (pull && pull.head.sha) {
           sha = pull.head.sha;
         }
-    }
-    if (inputSHA) {
-        sha = inputSHA;
     }
     return sha;
 };
@@ -40,7 +37,7 @@ async function run() {
     };
 
     console.log('Getting SHA')
-    const sha = getSHA(inputs.sha);
+    const sha = getSHA();
 
     if (inputs.repo) {
         const repo = inputs.repo.split('/');
