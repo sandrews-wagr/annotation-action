@@ -1,0 +1,9 @@
+name: 'Annotation Creator'
+description: 'Annotate a PR'
+inputs:
+  annotations:  # path to json file with annotations
+    description: 'Path to annotations JSON file'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'

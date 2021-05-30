@@ -1,0 +1,24 @@
+{
+  "name": "annotation-action",
+  "version": "1.0.0",
+  "description": "Github Action that adds annotations to a PR",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandrews-wagr/annotation-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sandrews-wagr/annotation-action/issues"
+  },
+  "homepage": "https://github.com/sandrews-wagr/annotation-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.3.0",
+    "@actions/github": "^5.0.0"
+  }
+}
