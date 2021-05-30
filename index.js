@@ -40,12 +40,14 @@ async function run() {
     const sha = getSHA();
 
     console.log('Making Request...')
-    const response = await octokit.request(`GET /repos/${ownership.owner}/${ownership.repo}/commits/${sha}/check-runs`, {
+    const response = await octokit.request(`POST /repos/${ownership.owner}/${ownership.repo}/check-runs`, {
         owner: ownership.owner,
         repo: ownership.repo,
-        ref: sha
+        name: 'Create Annotations',
+        head_sha: sha,
+        annotations: data
     })
-    console.log(response.data.check_runs[0]);
+    console.log(response);
 
     } catch (error) {
     core.setFailed(error.message);
