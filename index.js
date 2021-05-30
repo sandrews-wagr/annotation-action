@@ -1,4 +1,4 @@
-import {parseInputs} from './inputs';
+const parseInputs = require('./inputs.js');
 const core = require('@actions/core');
 const github = require('@actions/github');
 const fs = require('fs');
