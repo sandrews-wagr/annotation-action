@@ -101,10 +101,10 @@ async function run() {
     const data = fs.readFileSync(annotationsPath, 'utf8')
     console.log(data)
 
-    core.debug('Getting inputs');
+    console.log('Getting inputs')
     const inputs = parseInputs(core.getInput);
 
-    core.debug('Setting up octokit');
+    console.log('Setting up octokit');
     const octokit = github.getOctokit(inputs.token);
 
     const ownership = {
@@ -112,6 +112,7 @@ async function run() {
         repo: github.context.repo.repo,
     };
 
+    console.log('Getting SHA')
     const sha = getSHA(inputs.sha);
 
     if (inputs.repo) {
@@ -120,6 +121,7 @@ async function run() {
         ownership.repo = repo[1];
     }
 
+    console.log('Making Request...')
     const response = await octokit.request(`GET /repos/${ownership.owner}/${ownership.repo}/commits/${sha}/check-runs`, {
         owner: 'octocat',
         repo: 'hello-world',
