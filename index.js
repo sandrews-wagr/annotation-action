@@ -41,9 +41,9 @@ async function run() {
 
     console.log('Making Request...')
     const response = await octokit.request(`GET /repos/${ownership.owner}/${ownership.repo}/commits/${sha}/check-runs`, {
-        owner: 'octocat',
-        repo: 'hello-world',
-        ref: 'ref'
+        owner: ownership.owner,
+        repo: ownership.repo,
+        ref: sha
     })
     console.log(response);
 
